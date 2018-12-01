@@ -193,6 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EleccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\Seguridad\RolesController.cs" />
@@ -221,9 +222,33 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Circuito.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF Extended Models\AspNetRolesVM.cs" />
     <Compile Include="Models\App Models\IdentityModels.cs" />
+    <Compile Include="Models\Eleccion.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnlaceEleccionEscuela.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnlaceEleccionTipoCategoria.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnlaceEleccionTipoCategoriaLista.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Escuela.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JuntaDepartamental.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lista.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
@@ -233,6 +258,9 @@
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MenuAspNetRolesAccion.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mesa.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model_PJ.Context.cs">
@@ -249,6 +277,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_PJ.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Municipio.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecuentoVoto.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoCategoria.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoPartidoPolitico.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1628,6 +1671,11 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Elecciones\Create.cshtml" />
+    <Content Include="Views\Elecciones\Delete.cshtml" />
+    <Content Include="Views\Elecciones\Details.cshtml" />
+    <Content Include="Views\Elecciones\Edit.cshtml" />
+    <Content Include="Views\Elecciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

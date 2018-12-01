@@ -74,6 +74,73 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Dni" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Circuito">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="JuntaDepartamentalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Eleccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Año" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="date" Nullable="false" />
+          <Property Name="UsuarioID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EnlaceEleccionEscuela">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EleccionID" Type="int" Nullable="false" />
+          <Property Name="EscuelaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EnlaceEleccionTipoCategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EleccionID" Type="int" Nullable="false" />
+          <Property Name="TipoCategoriaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EnlaceEleccionTipoCategoriaLista">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ListaID" Type="int" Nullable="false" />
+          <Property Name="EnlaceEleccionTipoCategoriaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Escuela">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="int" Nullable="false" />
+          <Property Name="CircuitoID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JuntaDepartamental">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MunicipioID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lista">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TipoPartidoPoliticoID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -106,6 +173,58 @@
           <Property Name="AccionId" Type="int" Nullable="false" />
           <Property Name="MenuAspNetRolesId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Mesa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="EnlaceEleccionEscuelaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Municipio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecuentoVoto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CantidadVotos" Type="int" Nullable="false" />
+          <Property Name="EnlaceEleccionTipoCategoriaListaID" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioCreacionID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UsuarioActualizacionID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MesaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoCategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPartidoPolitico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AspNetMenuAccion_Accion">
           <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
           <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
@@ -127,6 +246,18 @@
             </Principal>
             <Dependent Role="AspNetMenuAccion">
               <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Circuito_JuntaDepartamental">
+          <End Role="JuntaDepartamental" Type="Self.JuntaDepartamental" Multiplicity="1" />
+          <End Role="Circuito" Type="Self.Circuito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Circuito">
+              <PropertyRef Name="JuntaDepartamentalID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -183,6 +314,126 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Eleccion_Eleccion">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Eleccion" Type="Self.Eleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Eleccion">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionEscuela_Eleccion">
+          <End Role="Eleccion" Type="Self.Eleccion" Multiplicity="1" />
+          <End Role="EnlaceEleccionEscuela" Type="Self.EnlaceEleccionEscuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eleccion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="EleccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionEscuela_Escuela">
+          <End Role="Escuela" Type="Self.Escuela" Multiplicity="1" />
+          <End Role="EnlaceEleccionEscuela" Type="Self.EnlaceEleccionEscuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="EscuelaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoria_Eleccion">
+          <End Role="Eleccion" Type="Self.Eleccion" Multiplicity="1" />
+          <End Role="EnlaceEleccionTipoCategoria" Type="Self.EnlaceEleccionTipoCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eleccion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoria">
+              <PropertyRef Name="EleccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoria_TipoCategoria">
+          <End Role="TipoCategoria" Type="Self.TipoCategoria" Multiplicity="1" />
+          <End Role="EnlaceEleccionTipoCategoria" Type="Self.EnlaceEleccionTipoCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCategoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoria">
+              <PropertyRef Name="TipoCategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria">
+          <End Role="EnlaceEleccionTipoCategoria" Type="Self.EnlaceEleccionTipoCategoria" Multiplicity="1" />
+          <End Role="EnlaceEleccionTipoCategoriaLista" Type="Self.EnlaceEleccionTipoCategoriaLista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceEleccionTipoCategoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoriaLista">
+              <PropertyRef Name="EnlaceEleccionTipoCategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoriaLista_Lista">
+          <End Role="Lista" Type="Self.Lista" Multiplicity="1" />
+          <End Role="EnlaceEleccionTipoCategoriaLista" Type="Self.EnlaceEleccionTipoCategoriaLista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lista">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoriaLista">
+              <PropertyRef Name="ListaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Escuela_Circuito">
+          <End Role="Circuito" Type="Self.Circuito" Multiplicity="1" />
+          <End Role="Escuela" Type="Self.Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuito">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="CircuitoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JuntaDepartamental_Municipio">
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
+          <End Role="JuntaDepartamental" Type="Self.JuntaDepartamental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JuntaDepartamental">
+              <PropertyRef Name="MunicipioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lista_TipoPartidoPolitico">
+          <End Role="TipoPartidoPolitico" Type="Self.TipoPartidoPolitico" Multiplicity="1" />
+          <End Role="Lista" Type="Self.Lista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPartidoPolitico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lista">
+              <PropertyRef Name="TipoPartidoPoliticoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -246,6 +497,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Mesa_EnlaceEleccionEscuela">
+          <End Role="EnlaceEleccionEscuela" Type="Self.EnlaceEleccionEscuela" Multiplicity="1" />
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Mesa">
+              <PropertyRef Name="EnlaceEleccionEscuelaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="RecuentoVoto" Type="Self.RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="UsuarioActualizacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="RecuentoVoto" Type="Self.RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="UsuarioCreacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista">
+          <End Role="EnlaceEleccionTipoCategoriaLista" Type="Self.EnlaceEleccionTipoCategoriaLista" Multiplicity="1" />
+          <End Role="RecuentoVoto" Type="Self.RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceEleccionTipoCategoriaLista">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="EnlaceEleccionTipoCategoriaListaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_Mesa">
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="1" />
+          <End Role="RecuentoVoto" Type="Self.RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mesa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="MesaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
@@ -257,9 +568,23 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Circuito" EntityType="Self.Circuito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Eleccion" EntityType="Self.Eleccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnlaceEleccionEscuela" EntityType="Self.EnlaceEleccionEscuela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnlaceEleccionTipoCategoria" EntityType="Self.EnlaceEleccionTipoCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnlaceEleccionTipoCategoriaLista" EntityType="Self.EnlaceEleccionTipoCategoriaLista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Escuela" EntityType="Self.Escuela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JuntaDepartamental" EntityType="Self.JuntaDepartamental" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lista" EntityType="Self.Lista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mesa" EntityType="Self.Mesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecuentoVoto" EntityType="Self.RecuentoVoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCategoria" EntityType="Self.TipoCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPartidoPolitico" EntityType="Self.TipoPartidoPolitico" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
@@ -267,6 +592,10 @@
           <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Circuito_JuntaDepartamental" Association="Self.FK_Circuito_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="Circuito" EntitySet="Circuito" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -283,6 +612,46 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Eleccion_Eleccion" Association="Self.FK_Eleccion_Eleccion">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Eleccion" EntitySet="Eleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionEscuela_Eleccion" Association="Self.FK_EnlaceEleccionEscuela_Eleccion">
+            <End Role="Eleccion" EntitySet="Eleccion" />
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionEscuela_Escuela" Association="Self.FK_EnlaceEleccionEscuela_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoria_Eleccion" Association="Self.FK_EnlaceEleccionTipoCategoria_Eleccion">
+            <End Role="Eleccion" EntitySet="Eleccion" />
+            <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoria_TipoCategoria" Association="Self.FK_EnlaceEleccionTipoCategoria_TipoCategoria">
+            <End Role="TipoCategoria" EntitySet="TipoCategoria" />
+            <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria" Association="Self.FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria">
+            <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
+            <End Role="EnlaceEleccionTipoCategoriaLista" EntitySet="EnlaceEleccionTipoCategoriaLista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoriaLista_Lista" Association="Self.FK_EnlaceEleccionTipoCategoriaLista_Lista">
+            <End Role="Lista" EntitySet="Lista" />
+            <End Role="EnlaceEleccionTipoCategoriaLista" EntitySet="EnlaceEleccionTipoCategoriaLista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Escuela_Circuito" Association="Self.FK_Escuela_Circuito">
+            <End Role="Circuito" EntitySet="Circuito" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JuntaDepartamental_Municipio" Association="Self.FK_JuntaDepartamental_Municipio">
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lista_TipoPartidoPolitico" Association="Self.FK_Lista_TipoPartidoPolitico">
+            <End Role="TipoPartidoPolitico" EntitySet="TipoPartidoPolitico" />
+            <End Role="Lista" EntitySet="Lista" />
           </AssociationSet>
           <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
             <End Role="Menu" EntitySet="Menu" />
@@ -303,6 +672,26 @@
           <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
             <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
             <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mesa_EnlaceEleccionEscuela" Association="Self.FK_Mesa_EnlaceEleccionEscuela">
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+            <End Role="Mesa" EntitySet="Mesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers" Association="Self.FK_RecuentoVoto_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers1" Association="Self.FK_RecuentoVoto_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista" Association="Self.FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista">
+            <End Role="EnlaceEleccionTipoCategoriaLista" EntitySet="EnlaceEleccionTipoCategoriaLista" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_Mesa" Association="Self.FK_RecuentoVoto_Mesa">
+            <End Role="Mesa" EntitySet="Mesa" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -360,6 +749,10 @@
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Dni" Type="Int64" />
+          <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="AspNetUsers" ToRole="Eleccion" />
+          <NavigationProperty Name="RecuentoVoto" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
+          <NavigationProperty Name="RecuentoVoto1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -441,6 +834,84 @@
           <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(ComputosPJModel.GetPermisosPorNombreDeUsuario_Result)">
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Circuito" EntityType="ComputosPJModel.Circuito" />
+          <EntitySet Name="Eleccion" EntityType="ComputosPJModel.Eleccion" />
+          <EntitySet Name="EnlaceEleccionEscuela" EntityType="ComputosPJModel.EnlaceEleccionEscuela" />
+          <EntitySet Name="EnlaceEleccionTipoCategoria" EntityType="ComputosPJModel.EnlaceEleccionTipoCategoria" />
+          <EntitySet Name="EnlaceEleccionTipoCategoriaLista" EntityType="ComputosPJModel.EnlaceEleccionTipoCategoriaLista" />
+          <EntitySet Name="Escuela" EntityType="ComputosPJModel.Escuela" />
+          <EntitySet Name="JuntaDepartamental" EntityType="ComputosPJModel.JuntaDepartamental" />
+          <EntitySet Name="Lista" EntityType="ComputosPJModel.Lista" />
+          <EntitySet Name="Mesa" EntityType="ComputosPJModel.Mesa" />
+          <EntitySet Name="Municipio" EntityType="ComputosPJModel.Municipio" />
+          <EntitySet Name="RecuentoVoto" EntityType="ComputosPJModel.RecuentoVoto" />
+          <EntitySet Name="sysdiagrams" EntityType="ComputosPJModel.sysdiagrams" />
+          <EntitySet Name="TipoCategoria" EntityType="ComputosPJModel.TipoCategoria" />
+          <EntitySet Name="TipoPartidoPolitico" EntityType="ComputosPJModel.TipoPartidoPolitico" />
+          <AssociationSet Name="FK_Eleccion_Eleccion" Association="ComputosPJModel.FK_Eleccion_Eleccion">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Eleccion" EntitySet="Eleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers" Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers1" Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Circuito_JuntaDepartamental" Association="ComputosPJModel.FK_Circuito_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="Circuito" EntitySet="Circuito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Escuela_Circuito" Association="ComputosPJModel.FK_Escuela_Circuito">
+            <End Role="Circuito" EntitySet="Circuito" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionEscuela_Eleccion" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion">
+            <End Role="Eleccion" EntitySet="Eleccion" />
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoria_Eleccion" Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_Eleccion">
+            <End Role="Eleccion" EntitySet="Eleccion" />
+            <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionEscuela_Escuela" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mesa_EnlaceEleccionEscuela" Association="ComputosPJModel.FK_Mesa_EnlaceEleccionEscuela">
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+            <End Role="Mesa" EntitySet="Mesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoria_TipoCategoria" Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_TipoCategoria">
+            <End Role="TipoCategoria" EntitySet="TipoCategoria" />
+            <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria" Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria">
+            <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
+            <End Role="EnlaceEleccionTipoCategoriaLista" EntitySet="EnlaceEleccionTipoCategoriaLista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionTipoCategoriaLista_Lista" Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_Lista">
+            <End Role="Lista" EntitySet="Lista" />
+            <End Role="EnlaceEleccionTipoCategoriaLista" EntitySet="EnlaceEleccionTipoCategoriaLista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista" Association="ComputosPJModel.FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista">
+            <End Role="EnlaceEleccionTipoCategoriaLista" EntitySet="EnlaceEleccionTipoCategoriaLista" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JuntaDepartamental_Municipio" Association="ComputosPJModel.FK_JuntaDepartamental_Municipio">
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lista_TipoPartidoPolitico" Association="ComputosPJModel.FK_Lista_TipoPartidoPolitico">
+            <End Role="TipoPartidoPolitico" EntitySet="TipoPartidoPolitico" />
+            <End Role="Lista" EntitySet="Lista" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_Mesa" Association="ComputosPJModel.FK_RecuentoVoto_Mesa">
+            <End Role="Mesa" EntitySet="Mesa" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Accion">
           <Key>
@@ -569,6 +1040,345 @@
           <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="mnuId" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Circuito">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="JuntaDepartamentalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JuntaDepartamental" Relationship="ComputosPJModel.FK_Circuito_JuntaDepartamental" FromRole="Circuito" ToRole="JuntaDepartamental" />
+          <NavigationProperty Name="Escuela" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Circuito" ToRole="Escuela" />
+        </EntityType>
+        <EntityType Name="Eleccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Año" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UsuarioID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="Eleccion" ToRole="AspNetUsers" />
+          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion" FromRole="Eleccion" ToRole="EnlaceEleccionEscuela" />
+          <NavigationProperty Name="EnlaceEleccionTipoCategoria" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_Eleccion" FromRole="Eleccion" ToRole="EnlaceEleccionTipoCategoria" />
+        </EntityType>
+        <EntityType Name="EnlaceEleccionEscuela">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EleccionID" Type="Int32" Nullable="false" />
+          <Property Name="EscuelaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion" FromRole="EnlaceEleccionEscuela" ToRole="Eleccion" />
+          <NavigationProperty Name="Escuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="EnlaceEleccionEscuela" ToRole="Escuela" />
+          <NavigationProperty Name="Mesa" Relationship="ComputosPJModel.FK_Mesa_EnlaceEleccionEscuela" FromRole="EnlaceEleccionEscuela" ToRole="Mesa" />
+        </EntityType>
+        <EntityType Name="EnlaceEleccionTipoCategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EleccionID" Type="Int32" Nullable="false" />
+          <Property Name="TipoCategoriaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_Eleccion" FromRole="EnlaceEleccionTipoCategoria" ToRole="Eleccion" />
+          <NavigationProperty Name="TipoCategoria" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_TipoCategoria" FromRole="EnlaceEleccionTipoCategoria" ToRole="TipoCategoria" />
+          <NavigationProperty Name="EnlaceEleccionTipoCategoriaLista" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria" FromRole="EnlaceEleccionTipoCategoria" ToRole="EnlaceEleccionTipoCategoriaLista" />
+        </EntityType>
+        <EntityType Name="EnlaceEleccionTipoCategoriaLista">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListaID" Type="Int32" Nullable="false" />
+          <Property Name="EnlaceEleccionTipoCategoriaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EnlaceEleccionTipoCategoria" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria" FromRole="EnlaceEleccionTipoCategoriaLista" ToRole="EnlaceEleccionTipoCategoria" />
+          <NavigationProperty Name="Lista" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_Lista" FromRole="EnlaceEleccionTipoCategoriaLista" ToRole="Lista" />
+          <NavigationProperty Name="RecuentoVoto" Relationship="ComputosPJModel.FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista" FromRole="EnlaceEleccionTipoCategoriaLista" ToRole="RecuentoVoto" />
+        </EntityType>
+        <EntityType Name="Escuela">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="Int32" Nullable="false" />
+          <Property Name="CircuitoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Escuela" ToRole="Circuito" />
+          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="Escuela" ToRole="EnlaceEleccionEscuela" />
+        </EntityType>
+        <EntityType Name="JuntaDepartamental">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MunicipioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Circuito_JuntaDepartamental" FromRole="JuntaDepartamental" ToRole="Circuito" />
+          <NavigationProperty Name="Municipio" Relationship="ComputosPJModel.FK_JuntaDepartamental_Municipio" FromRole="JuntaDepartamental" ToRole="Municipio" />
+        </EntityType>
+        <EntityType Name="Lista">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TipoPartidoPoliticoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EnlaceEleccionTipoCategoriaLista" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_Lista" FromRole="Lista" ToRole="EnlaceEleccionTipoCategoriaLista" />
+          <NavigationProperty Name="TipoPartidoPolitico" Relationship="ComputosPJModel.FK_Lista_TipoPartidoPolitico" FromRole="Lista" ToRole="TipoPartidoPolitico" />
+        </EntityType>
+        <EntityType Name="Mesa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="EnlaceEleccionEscuelaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_Mesa_EnlaceEleccionEscuela" FromRole="Mesa" ToRole="EnlaceEleccionEscuela" />
+          <NavigationProperty Name="RecuentoVoto" Relationship="ComputosPJModel.FK_RecuentoVoto_Mesa" FromRole="Mesa" ToRole="RecuentoVoto" />
+        </EntityType>
+        <EntityType Name="Municipio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JuntaDepartamental" Relationship="ComputosPJModel.FK_JuntaDepartamental_Municipio" FromRole="Municipio" ToRole="JuntaDepartamental" />
+        </EntityType>
+        <EntityType Name="RecuentoVoto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CantidadVotos" Type="Int32" Nullable="false" />
+          <Property Name="EnlaceEleccionTipoCategoriaListaID" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioCreacionID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioActualizacionID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MesaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
+          <NavigationProperty Name="EnlaceEleccionTipoCategoriaLista" Relationship="ComputosPJModel.FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista" FromRole="RecuentoVoto" ToRole="EnlaceEleccionTipoCategoriaLista" />
+          <NavigationProperty Name="Mesa" Relationship="ComputosPJModel.FK_RecuentoVoto_Mesa" FromRole="RecuentoVoto" ToRole="Mesa" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoCategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EnlaceEleccionTipoCategoria" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_TipoCategoria" FromRole="TipoCategoria" ToRole="EnlaceEleccionTipoCategoria" />
+        </EntityType>
+        <EntityType Name="TipoPartidoPolitico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lista" Relationship="ComputosPJModel.FK_Lista_TipoPartidoPolitico" FromRole="TipoPartidoPolitico" ToRole="Lista" />
+        </EntityType>
+        <Association Name="FK_Eleccion_Eleccion">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Eleccion">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_AspNetUsers">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="UsuarioActualizacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_AspNetUsers1">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="UsuarioCreacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Circuito_JuntaDepartamental">
+          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="1" />
+          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Circuito">
+              <PropertyRef Name="JuntaDepartamentalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Escuela_Circuito">
+          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="1" />
+          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuito">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="CircuitoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionEscuela_Eleccion">
+          <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eleccion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="EleccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoria_Eleccion">
+          <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionTipoCategoria" Role="EnlaceEleccionTipoCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eleccion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoria">
+              <PropertyRef Name="EleccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionEscuela_Escuela">
+          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="EscuelaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mesa_EnlaceEleccionEscuela">
+          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="1" />
+          <End Type="ComputosPJModel.Mesa" Role="Mesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Mesa">
+              <PropertyRef Name="EnlaceEleccionEscuelaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoria_TipoCategoria">
+          <End Type="ComputosPJModel.TipoCategoria" Role="TipoCategoria" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionTipoCategoria" Role="EnlaceEleccionTipoCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCategoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoria">
+              <PropertyRef Name="TipoCategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria">
+          <End Type="ComputosPJModel.EnlaceEleccionTipoCategoria" Role="EnlaceEleccionTipoCategoria" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionTipoCategoriaLista" Role="EnlaceEleccionTipoCategoriaLista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceEleccionTipoCategoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoriaLista">
+              <PropertyRef Name="EnlaceEleccionTipoCategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionTipoCategoriaLista_Lista">
+          <End Type="ComputosPJModel.Lista" Role="Lista" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionTipoCategoriaLista" Role="EnlaceEleccionTipoCategoriaLista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lista">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionTipoCategoriaLista">
+              <PropertyRef Name="ListaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista">
+          <End Type="ComputosPJModel.EnlaceEleccionTipoCategoriaLista" Role="EnlaceEleccionTipoCategoriaLista" Multiplicity="1" />
+          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnlaceEleccionTipoCategoriaLista">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="EnlaceEleccionTipoCategoriaListaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JuntaDepartamental_Municipio">
+          <End Type="ComputosPJModel.Municipio" Role="Municipio" Multiplicity="1" />
+          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JuntaDepartamental">
+              <PropertyRef Name="MunicipioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lista_TipoPartidoPolitico">
+          <End Type="ComputosPJModel.TipoPartidoPolitico" Role="TipoPartidoPolitico" Multiplicity="1" />
+          <End Type="ComputosPJModel.Lista" Role="Lista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPartidoPolitico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lista">
+              <PropertyRef Name="TipoPartidoPoliticoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_Mesa">
+          <End Type="ComputosPJModel.Mesa" Role="Mesa" Multiplicity="1" />
+          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mesa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="MesaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -605,6 +1415,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="ComputosPJModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Dni" ColumnName="Dni" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -698,6 +1509,138 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Circuito">
+            <EntityTypeMapping TypeName="ComputosPJModel.Circuito">
+              <MappingFragment StoreEntitySet="Circuito">
+                <ScalarProperty Name="JuntaDepartamentalID" ColumnName="JuntaDepartamentalID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Eleccion">
+            <EntityTypeMapping TypeName="ComputosPJModel.Eleccion">
+              <MappingFragment StoreEntitySet="Eleccion">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnlaceEleccionEscuela">
+            <EntityTypeMapping TypeName="ComputosPJModel.EnlaceEleccionEscuela">
+              <MappingFragment StoreEntitySet="EnlaceEleccionEscuela">
+                <ScalarProperty Name="EscuelaID" ColumnName="EscuelaID" />
+                <ScalarProperty Name="EleccionID" ColumnName="EleccionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnlaceEleccionTipoCategoria">
+            <EntityTypeMapping TypeName="ComputosPJModel.EnlaceEleccionTipoCategoria">
+              <MappingFragment StoreEntitySet="EnlaceEleccionTipoCategoria">
+                <ScalarProperty Name="TipoCategoriaID" ColumnName="TipoCategoriaID" />
+                <ScalarProperty Name="EleccionID" ColumnName="EleccionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnlaceEleccionTipoCategoriaLista">
+            <EntityTypeMapping TypeName="ComputosPJModel.EnlaceEleccionTipoCategoriaLista">
+              <MappingFragment StoreEntitySet="EnlaceEleccionTipoCategoriaLista">
+                <ScalarProperty Name="EnlaceEleccionTipoCategoriaID" ColumnName="EnlaceEleccionTipoCategoriaID" />
+                <ScalarProperty Name="ListaID" ColumnName="ListaID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Escuela">
+            <EntityTypeMapping TypeName="ComputosPJModel.Escuela">
+              <MappingFragment StoreEntitySet="Escuela">
+                <ScalarProperty Name="CircuitoID" ColumnName="CircuitoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JuntaDepartamental">
+            <EntityTypeMapping TypeName="ComputosPJModel.JuntaDepartamental">
+              <MappingFragment StoreEntitySet="JuntaDepartamental">
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lista">
+            <EntityTypeMapping TypeName="ComputosPJModel.Lista">
+              <MappingFragment StoreEntitySet="Lista">
+                <ScalarProperty Name="TipoPartidoPoliticoID" ColumnName="TipoPartidoPoliticoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mesa">
+            <EntityTypeMapping TypeName="ComputosPJModel.Mesa">
+              <MappingFragment StoreEntitySet="Mesa">
+                <ScalarProperty Name="EnlaceEleccionEscuelaID" ColumnName="EnlaceEleccionEscuelaID" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipio">
+            <EntityTypeMapping TypeName="ComputosPJModel.Municipio">
+              <MappingFragment StoreEntitySet="Municipio">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecuentoVoto">
+            <EntityTypeMapping TypeName="ComputosPJModel.RecuentoVoto">
+              <MappingFragment StoreEntitySet="RecuentoVoto">
+                <ScalarProperty Name="MesaID" ColumnName="MesaID" />
+                <ScalarProperty Name="UsuarioActualizacionID" ColumnName="UsuarioActualizacionID" />
+                <ScalarProperty Name="UsuarioCreacionID" ColumnName="UsuarioCreacionID" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="EnlaceEleccionTipoCategoriaListaID" ColumnName="EnlaceEleccionTipoCategoriaListaID" />
+                <ScalarProperty Name="CantidadVotos" ColumnName="CantidadVotos" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ComputosPJModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCategoria">
+            <EntityTypeMapping TypeName="ComputosPJModel.TipoCategoria">
+              <MappingFragment StoreEntitySet="TipoCategoria">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPartidoPolitico">
+            <EntityTypeMapping TypeName="ComputosPJModel.TipoPartidoPolitico">
+              <MappingFragment StoreEntitySet="TipoPartidoPolitico">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
