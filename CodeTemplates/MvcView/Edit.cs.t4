@@ -113,7 +113,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 <#
             if (property.IsForeignKey) {
 #>
-                @Html.DropDownList("<#= property.PropertyName #>", String.Empty)
+               @Html.DropDownListFor(model => model.<#= property.PropertyName #>, (IEnumerable<SelectListItem>) ViewBag.<#= property.PropertyName #>, new { @class = "form-control m-b" })
 <#
             } else {
 #>
