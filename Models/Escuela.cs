@@ -21,7 +21,7 @@ namespace ComputosPJ.Models
         }
     
         public int ID { get; set; }
-        public int Nombre { get; set; }
+        public string Nombre { get; set; }
         public int CircuitoID { get; set; }
     
         public virtual Circuito Circuito { get; set; }

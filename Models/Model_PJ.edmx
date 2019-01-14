@@ -124,6 +124,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="CircuitoID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="JuntaDepartamental">
@@ -839,7 +840,6 @@
           <EntitySet Name="EnlaceEleccionEscuela" EntityType="ComputosPJModel.EnlaceEleccionEscuela" />
           <EntitySet Name="EnlaceEleccionTipoCategoria" EntityType="ComputosPJModel.EnlaceEleccionTipoCategoria" />
           <EntitySet Name="EnlaceEleccionTipoCategoriaLista" EntityType="ComputosPJModel.EnlaceEleccionTipoCategoriaLista" />
-          <EntitySet Name="Escuela" EntityType="ComputosPJModel.Escuela" />
           <EntitySet Name="JuntaDepartamental" EntityType="ComputosPJModel.JuntaDepartamental" />
           <EntitySet Name="Lista" EntityType="ComputosPJModel.Lista" />
           <EntitySet Name="Mesa" EntityType="ComputosPJModel.Mesa" />
@@ -864,10 +864,6 @@
             <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
             <End Role="Circuito" EntitySet="Circuito" />
           </AssociationSet>
-          <AssociationSet Name="FK_Escuela_Circuito" Association="ComputosPJModel.FK_Escuela_Circuito">
-            <End Role="Circuito" EntitySet="Circuito" />
-            <End Role="Escuela" EntitySet="Escuela" />
-          </AssociationSet>
           <AssociationSet Name="FK_EnlaceEleccionEscuela_Eleccion" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion">
             <End Role="Eleccion" EntitySet="Eleccion" />
             <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
@@ -875,10 +871,6 @@
           <AssociationSet Name="FK_EnlaceEleccionTipoCategoria_Eleccion" Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_Eleccion">
             <End Role="Eleccion" EntitySet="Eleccion" />
             <End Role="EnlaceEleccionTipoCategoria" EntitySet="EnlaceEleccionTipoCategoria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EnlaceEleccionEscuela_Escuela" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
           </AssociationSet>
           <AssociationSet Name="FK_Mesa_EnlaceEleccionEscuela" Association="ComputosPJModel.FK_Mesa_EnlaceEleccionEscuela">
             <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
@@ -911,6 +903,15 @@
           <AssociationSet Name="FK_RecuentoVoto_Mesa" Association="ComputosPJModel.FK_RecuentoVoto_Mesa">
             <End Role="Mesa" EntitySet="Mesa" />
             <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <EntitySet Name="Escuela" EntityType="ComputosPJModel.Escuela" />
+          <AssociationSet Name="FK_Escuela_Circuito" Association="ComputosPJModel.FK_Escuela_Circuito">
+            <End Role="Circuito" EntitySet="Circuito" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionEscuela_Escuela" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Accion">
@@ -1071,8 +1072,8 @@
           <Property Name="EleccionID" Type="Int32" Nullable="false" />
           <Property Name="EscuelaID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion" FromRole="EnlaceEleccionEscuela" ToRole="Eleccion" />
-          <NavigationProperty Name="Escuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="EnlaceEleccionEscuela" ToRole="Escuela" />
           <NavigationProperty Name="Mesa" Relationship="ComputosPJModel.FK_Mesa_EnlaceEleccionEscuela" FromRole="EnlaceEleccionEscuela" ToRole="Mesa" />
+          <NavigationProperty Name="Escuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="EnlaceEleccionEscuela" ToRole="Escuela" />
         </EntityType>
         <EntityType Name="EnlaceEleccionTipoCategoria">
           <Key>
@@ -1095,16 +1096,6 @@
           <NavigationProperty Name="EnlaceEleccionTipoCategoria" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria" FromRole="EnlaceEleccionTipoCategoriaLista" ToRole="EnlaceEleccionTipoCategoria" />
           <NavigationProperty Name="Lista" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_Lista" FromRole="EnlaceEleccionTipoCategoriaLista" ToRole="Lista" />
           <NavigationProperty Name="RecuentoVoto" Relationship="ComputosPJModel.FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista" FromRole="EnlaceEleccionTipoCategoriaLista" ToRole="RecuentoVoto" />
-        </EntityType>
-        <EntityType Name="Escuela">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="Int32" Nullable="false" />
-          <Property Name="CircuitoID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Escuela" ToRole="Circuito" />
-          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="Escuela" ToRole="EnlaceEleccionEscuela" />
         </EntityType>
         <EntityType Name="JuntaDepartamental">
           <Key>
@@ -1235,18 +1226,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Escuela_Circuito">
-          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="1" />
-          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Circuito">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Escuela">
-              <PropertyRef Name="CircuitoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EnlaceEleccionEscuela_Eleccion">
           <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="1" />
           <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
@@ -1268,18 +1247,6 @@
             </Principal>
             <Dependent Role="EnlaceEleccionTipoCategoria">
               <PropertyRef Name="EleccionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EnlaceEleccionEscuela_Escuela">
-          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="1" />
-          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EnlaceEleccionEscuela">
-              <PropertyRef Name="EscuelaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1376,6 +1343,40 @@
             </Principal>
             <Dependent Role="RecuentoVoto">
               <PropertyRef Name="MesaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Escuela">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CircuitoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Escuela" ToRole="Circuito" />
+          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="Escuela" ToRole="EnlaceEleccionEscuela" />
+        </EntityType>
+        <Association Name="FK_Escuela_Circuito">
+          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="1" />
+          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuito">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="CircuitoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionEscuela_Escuela">
+          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="EscuelaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1556,15 +1557,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Escuela">
-            <EntityTypeMapping TypeName="ComputosPJModel.Escuela">
-              <MappingFragment StoreEntitySet="Escuela">
-                <ScalarProperty Name="CircuitoID" ColumnName="CircuitoID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="JuntaDepartamental">
             <EntityTypeMapping TypeName="ComputosPJModel.JuntaDepartamental">
               <MappingFragment StoreEntitySet="JuntaDepartamental">
@@ -1636,6 +1628,15 @@
           <EntitySetMapping Name="TipoPartidoPolitico">
             <EntityTypeMapping TypeName="ComputosPJModel.TipoPartidoPolitico">
               <MappingFragment StoreEntitySet="TipoPartidoPolitico">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Escuela">
+            <EntityTypeMapping TypeName="ComputosPJModel.Escuela">
+              <MappingFragment StoreEntitySet="Escuela">
+                <ScalarProperty Name="CircuitoID" ColumnName="CircuitoID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

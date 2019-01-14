@@ -25,8 +25,8 @@ namespace ComputosPJ.Models
         public int EscuelaID { get; set; }
     
         public virtual Eleccion Eleccion { get; set; }
-        public virtual Escuela Escuela { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mesa> Mesa { get; set; }
+        public virtual Escuela Escuela { get; set; }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model ComputosPJ.Models.Mesa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Details Mesa</h5>
+                </div>
+                <div class="ibox-content">
+
+
+				    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnlaceEleccionEscuela.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnlaceEleccionEscuela.ID)
+        </dd>
+
+    </dl>
+
+
+	    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-warning"})
+    @Html.ActionLink("Volver a Listado", "Index", null, new { @class = "btn btn-white"})
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

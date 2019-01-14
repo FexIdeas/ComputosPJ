@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="ComputosPJModel.EnlaceEleccionEscuela" Width="1.5" PointX="7.5" PointY="7.875" />
         <EntityTypeShape EntityType="ComputosPJModel.EnlaceEleccionTipoCategoria" Width="1.5" PointX="7.5" PointY="10.875" />
         <EntityTypeShape EntityType="ComputosPJModel.EnlaceEleccionTipoCategoriaLista" Width="1.5" PointX="9.75" PointY="10.875" />
-        <EntityTypeShape EntityType="ComputosPJModel.Escuela" Width="1.5" PointX="5.25" PointY="15.875" />
         <EntityTypeShape EntityType="ComputosPJModel.JuntaDepartamental" Width="1.5" PointX="0.75" PointY="15.875" />
         <EntityTypeShape EntityType="ComputosPJModel.Lista" Width="1.5" PointX="7.5" PointY="21.75" />
         <EntityTypeShape EntityType="ComputosPJModel.Mesa" Width="1.5" PointX="9.75" PointY="7.875" />
@@ -40,10 +39,8 @@
         <AssociationConnector Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" />
         <AssociationConnector Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" />
         <AssociationConnector Association="ComputosPJModel.FK_Circuito_JuntaDepartamental" />
-        <AssociationConnector Association="ComputosPJModel.FK_Escuela_Circuito" />
         <AssociationConnector Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion" />
         <AssociationConnector Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_Eleccion" />
-        <AssociationConnector Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" />
         <AssociationConnector Association="ComputosPJModel.FK_Mesa_EnlaceEleccionEscuela" />
         <AssociationConnector Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_TipoCategoria" />
         <AssociationConnector Association="ComputosPJModel.FK_EnlaceEleccionTipoCategoriaLista_EnlaceEleccionTipoCategoria" />
@@ -52,6 +49,9 @@
         <AssociationConnector Association="ComputosPJModel.FK_JuntaDepartamental_Municipio" />
         <AssociationConnector Association="ComputosPJModel.FK_Lista_TipoPartidoPolitico" />
         <AssociationConnector Association="ComputosPJModel.FK_RecuentoVoto_Mesa" />
+        <EntityTypeShape EntityType="ComputosPJModel.Escuela" Width="1.5" PointX="5.25" PointY="15.875" />
+        <AssociationConnector Association="ComputosPJModel.FK_Escuela_Circuito" />
+        <AssociationConnector Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

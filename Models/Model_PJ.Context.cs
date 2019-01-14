@@ -40,7 +40,6 @@ namespace ComputosPJ.Models
         public virtual DbSet<EnlaceEleccionEscuela> EnlaceEleccionEscuela { get; set; }
         public virtual DbSet<EnlaceEleccionTipoCategoria> EnlaceEleccionTipoCategoria { get; set; }
         public virtual DbSet<EnlaceEleccionTipoCategoriaLista> EnlaceEleccionTipoCategoriaLista { get; set; }
-        public virtual DbSet<Escuela> Escuela { get; set; }
         public virtual DbSet<JuntaDepartamental> JuntaDepartamental { get; set; }
         public virtual DbSet<Lista> Lista { get; set; }
         public virtual DbSet<Mesa> Mesa { get; set; }
@@ -49,6 +48,7 @@ namespace ComputosPJ.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoCategoria> TipoCategoria { get; set; }
         public virtual DbSet<TipoPartidoPolitico> TipoPartidoPolitico { get; set; }
+        public virtual DbSet<Escuela> Escuela { get; set; }
     
         public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
         {
