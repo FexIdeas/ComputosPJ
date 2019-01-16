@@ -698,15 +698,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ComputosPJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-          <NavigationProperty Name="MenuAspNetRoles" Relationship="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
-        </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
@@ -715,7 +706,7 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
@@ -726,83 +717,11 @@
           <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Dni" Type="Int64" />
-          <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="AspNetUsers" ToRole="Eleccion" />
-          <NavigationProperty Name="RecuentoVoto" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
-          <NavigationProperty Name="RecuentoVoto1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="ComputosPJEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
           <EntitySet Name="Accion" EntityType="ComputosPJModel.Accion" />
           <EntitySet Name="Menu" EntityType="ComputosPJModel.Menu" />
           <EntitySet Name="MenuAspNetRoles" EntityType="ComputosPJModel.MenuAspNetRoles" />
@@ -810,10 +729,6 @@
           <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="ComputosPJModel.FK_MenuAspNetRolesAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Menu_Menu" Association="ComputosPJModel.FK_Menu_Menu">
             <End Role="Menu" EntitySet="Menu" />
@@ -847,18 +762,6 @@
           <EntitySet Name="sysdiagrams" EntityType="ComputosPJModel.sysdiagrams" />
           <EntitySet Name="TipoCategoria" EntityType="ComputosPJModel.TipoCategoria" />
           <EntitySet Name="TipoPartidoPolitico" EntityType="ComputosPJModel.TipoPartidoPolitico" />
-          <AssociationSet Name="FK_Eleccion_Eleccion" Association="ComputosPJModel.FK_Eleccion_Eleccion">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Eleccion" EntitySet="Eleccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers" Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers1" Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
-          </AssociationSet>
           <AssociationSet Name="FK_Circuito_JuntaDepartamental" Association="ComputosPJModel.FK_Circuito_JuntaDepartamental">
             <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
             <End Role="Circuito" EntitySet="Circuito" />
@@ -912,6 +815,36 @@
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
           </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="ComputosPJModel.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="ComputosPJModel.AspNetUsers" />
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ComputosPJModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ComputosPJModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Eleccion_Eleccion" Association="ComputosPJModel.FK_Eleccion_Eleccion">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Eleccion" EntitySet="Eleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers" Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecuentoVoto_AspNetUsers1" Association="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="ComputosPJModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Accion">
           <Key>
@@ -950,9 +883,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MenuId" Type="Int32" Nullable="false" />
           <Property Name="AspNetRolesId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRoles" Relationship="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="MenuAspNetRoles" ToRole="AspNetRoles" />
           <NavigationProperty Name="Menu" Relationship="ComputosPJModel.FK_MenuAspNetRoles_Menu" FromRole="MenuAspNetRoles" ToRole="Menu" />
           <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="ComputosPJModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRoles" ToRole="MenuAspNetRolesAccion" />
+          <NavigationProperty Name="AspNetRoles" Relationship="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="MenuAspNetRoles" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="MenuAspNetRolesAccion">
           <Key>
@@ -973,18 +906,6 @@
             </Principal>
             <Dependent Role="MenuAspNetRolesAccion">
               <PropertyRef Name="AccionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
-          <End Type="ComputosPJModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
-          <End Type="ComputosPJModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuAspNetRoles">
-              <PropertyRef Name="AspNetRolesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1059,9 +980,9 @@
           <Property Name="Año" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UsuarioID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="Eleccion" ToRole="AspNetUsers" />
           <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion" FromRole="Eleccion" ToRole="EnlaceEleccionEscuela" />
           <NavigationProperty Name="EnlaceEleccionTipoCategoria" Relationship="ComputosPJModel.FK_EnlaceEleccionTipoCategoria_Eleccion" FromRole="Eleccion" ToRole="EnlaceEleccionTipoCategoria" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="Eleccion" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="EnlaceEleccionEscuela">
           <Key>
@@ -1146,10 +1067,10 @@
           <Property Name="UsuarioCreacionID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UsuarioActualizacionID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MesaID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
           <NavigationProperty Name="EnlaceEleccionTipoCategoriaLista" Relationship="ComputosPJModel.FK_RecuentoVoto_EnlaceEleccionTipoCategoriaLista" FromRole="RecuentoVoto" ToRole="EnlaceEleccionTipoCategoriaLista" />
           <NavigationProperty Name="Mesa" Relationship="ComputosPJModel.FK_RecuentoVoto_Mesa" FromRole="RecuentoVoto" ToRole="Mesa" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1177,42 +1098,6 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Lista" Relationship="ComputosPJModel.FK_Lista_TipoPartidoPolitico" FromRole="TipoPartidoPolitico" ToRole="Lista" />
         </EntityType>
-        <Association Name="FK_Eleccion_Eleccion">
-          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Eleccion">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RecuentoVoto_AspNetUsers">
-          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RecuentoVoto">
-              <PropertyRef Name="UsuarioActualizacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RecuentoVoto_AspNetUsers1">
-          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RecuentoVoto">
-              <PropertyRef Name="UsuarioCreacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Circuito_JuntaDepartamental">
           <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="1" />
           <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="*" />
@@ -1379,20 +1264,127 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Dni" Type="Int64" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="ComputosPJModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="ComputosPJModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="AspNetUsers" ToRole="Eleccion" />
+          <NavigationProperty Name="RecuentoVoto" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
+          <NavigationProperty Name="RecuentoVoto1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
+          <NavigationProperty Name="AspNetRoles" Relationship="ComputosPJModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Type="ComputosPJModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="ComputosPJModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ComputosPJModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ComputosPJModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Eleccion_Eleccion">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Eleccion">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_AspNetUsers">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="UsuarioActualizacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecuentoVoto_AspNetUsers1">
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ComputosPJModel.RecuentoVoto" Role="RecuentoVoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecuentoVoto">
+              <PropertyRef Name="UsuarioCreacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="ComputosPJModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ComputosPJModelStoreContainer" CdmEntityContainer="ComputosPJEntities">
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="ComputosPJModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="ComputosPJModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
@@ -1412,35 +1404,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="ComputosPJModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Dni" ColumnName="Dni" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ComputosPJModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Accion">
             <EntityTypeMapping TypeName="ComputosPJModel.Accion">
               <MappingFragment StoreEntitySet="Accion">
@@ -1641,6 +1604,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ComputosPJModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="ComputosPJModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Dni" ColumnName="Dni" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ComputosPJModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -27,10 +27,10 @@ namespace ComputosPJ.Models
         public System.DateTime FechaCreacion { get; set; }
         public string UsuarioID { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnlaceEleccionEscuela> EnlaceEleccionEscuela { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnlaceEleccionTipoCategoria> EnlaceEleccionTipoCategoria { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

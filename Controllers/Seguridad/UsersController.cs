@@ -78,7 +78,7 @@ namespace ComputosPJ.Controllers.Seguridad
             ComputosPJEntities Context = new ComputosPJEntities();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -116,8 +116,7 @@ namespace ComputosPJ.Controllers.Seguridad
             user.UserName = appUser.UserName;
             user.FirstName = appUser.FirstName;
             user.LastName = appUser.LastName;
-            user.Email = appUser.Email;
-            
+            user.Email = appUser.Email;            
             return View(user);
         }
 
@@ -139,8 +138,7 @@ namespace ComputosPJ.Controllers.Seguridad
                     currentUser.UserName = model.UserName;
                     currentUser.FirstName = model.FirstName;
                     currentUser.LastName = model.LastName;
-                    currentUser.Email = model.Email;
-
+                    currentUser.Email = model.Email;                    
                     await UserManager.UpdateAsync(currentUser);
 
                     var ctx = store.Context;

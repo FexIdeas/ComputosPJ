@@ -27,10 +27,8 @@ namespace ComputosPJ.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Accion> Accion { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<MenuAspNetRoles> MenuAspNetRoles { get; set; }
@@ -49,6 +47,8 @@ namespace ComputosPJ.Models
         public virtual DbSet<TipoCategoria> TipoCategoria { get; set; }
         public virtual DbSet<TipoPartidoPolitico> TipoPartidoPolitico { get; set; }
         public virtual DbSet<Escuela> Escuela { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     
         public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
         {

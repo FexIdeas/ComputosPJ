@@ -24,9 +24,9 @@ namespace ComputosPJ.Models
         public int MenuId { get; set; }
         public string AspNetRolesId { get; set; }
     
-        public virtual AspNetRoles AspNetRoles { get; set; }
         public virtual Menu Menu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
     }
 }

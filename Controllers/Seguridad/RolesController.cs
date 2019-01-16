@@ -62,7 +62,6 @@ namespace ComputosPJ.Controllers.Seguridad
                     var roleManager = new RoleManager<IdentityRole>(roleStore);
 
                     await roleManager.CreateAsync(new IdentityRole { Name = aspNetRoles.Name });
-
                     return RedirectToAction("Index");
 
                 }
@@ -113,7 +112,7 @@ namespace ComputosPJ.Controllers.Seguridad
 
                     var currentRol = roleManager.FindById(aspNetRoles.Id);
                     currentRol.Name = aspNetRoles.Name;
-
+                    
                     await roleManager.UpdateAsync(currentRol);
 
                     return RedirectToAction("Index");

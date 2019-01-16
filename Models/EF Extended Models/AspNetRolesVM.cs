@@ -21,7 +21,6 @@ namespace ComputosPJ.Models
         [Display(Name="Nombre")]
         public string Name { get; set; }
 
-
         /// <summary>
         /// Sin Validar
         /// </summary>

@@ -23,9 +23,9 @@ namespace ComputosPJ.Models
         public string UsuarioActualizacionID { get; set; }
         public int MesaID { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual EnlaceEleccionTipoCategoriaLista EnlaceEleccionTipoCategoriaLista { get; set; }
         public virtual Mesa Mesa { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUsers AspNetUsers1 { get; set; }
     }
 }
