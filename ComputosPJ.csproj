@@ -229,10 +229,14 @@
     <Compile Include="Models\Accion.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Afiliados.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\App Models\AccountViewModels.cs" />
     <Compile Include="Models\App Models\Menu\MenuAccionVM.cs" />
     <Compile Include="Models\App Models\Menu\MenuVM.cs" />
     <Compile Include="Models\App Models\Seguridad\AspNetUsersVM.cs" />
+    <Compile Include="Models\App Models\Seguridad\UsuarioApi.cs" />
     <Compile Include="Models\App Models\Seguridad\PermisosVM.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
@@ -305,16 +309,22 @@
     <Compile Include="Models\Municipio.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RecuentoVoto.cs">
+    <Compile Include="Models\Padron.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\RecuentoVoto.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoCategoria.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoPartidoPolitico.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsuarioApp.cs">
+      <DependentUpon>Model_PJ.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Version.cs">
       <DependentUpon>Model_PJ.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1750,6 +1760,7 @@
     <Content Include="Views\EnlaceEleccionesEscuelas\Details.cshtml" />
     <Content Include="Views\EnlaceEleccionesEscuelas\Edit.cshtml" />
     <Content Include="Views\EnlaceEleccionesEscuelas\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\ComputosPJSYNC.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

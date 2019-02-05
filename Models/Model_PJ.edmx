@@ -14,6 +14,28 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ComputosPJ.dbo.Afiliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Afiliados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ApellidoNombre" Type="nvarchar" MaxLength="256" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Matricula" Type="bigint" />
+          <Property Name="Domicilio" Type="nvarchar(max)" />
+          <Property Name="Seccion" Type="nvarchar" MaxLength="256" />
+          <Property Name="SeccionCod" Type="int" />
+          <Property Name="Circuito" Type="nvarchar" MaxLength="256" />
+          <Property Name="CircuitoCod" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaNacimiento" Type="nvarchar" MaxLength="50" />
+          <Property Name="Clase" Type="int" />
+          <Property Name="Profesion" Type="nvarchar" MaxLength="100" />
+          <Property Name="FechaDomicilio" Type="nvarchar" MaxLength="50" />
+          <Property Name="Partido" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="AspNetMenuAccion">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -75,6 +97,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
           <Property Name="Dni" Type="bigint" />
+          <Property Name="Foto" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Circuito">
           <Key>
@@ -83,6 +106,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="JuntaDepartamentalID" Type="int" Nullable="false" />
+          <Property Name="NumeroCircuito" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Eleccion">
           <Key>
@@ -123,7 +147,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre" Type="int" Nullable="false" />
           <Property Name="CircuitoID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="JuntaDepartamental">
@@ -188,6 +212,37 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ComputosPJ.dbo.Padron' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Padron">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Apellido" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="TipoMatricula" />
+            <PropertyRef Name="Matricula" />
+            <PropertyRef Name="NumeroCircuito" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TipoMatricula" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Matricula" Type="bigint" Nullable="false" />
+          <Property Name="Domicilio" Type="nvarchar(max)" />
+          <Property Name="NumeroCircuito" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Clase" Type="int" />
+          <Property Name="Profesion" Type="nvarchar(max)" />
+          <Property Name="FechaDomicilio" Type="date" />
+          <Property Name="Sexo" Type="char" MaxLength="10" />
+          <Property Name="EsAfiliado" Type="bit" />
+          <Property Name="AfiliadoCircuito" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvalMunicipioID" Type="int" />
+          <Property Name="AvalLista" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvalFechaAlta" Type="smalldatetime" />
+          <Property Name="AvalUsuarioAppIDAlta" Type="int" />
+          <Property Name="Afiliado" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="RecuentoVoto">
           <Key>
             <PropertyRef Name="ID" />
@@ -200,16 +255,6 @@
           <Property Name="UsuarioCreacionID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UsuarioActualizacionID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="MesaID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TipoCategoria">
           <Key>
@@ -224,6 +269,26 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsuarioApp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DNI" Type="bigint" Nullable="false" />
+          <Property Name="Celular" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Foto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JuntaDepartamentalID" Type="int" />
+          <Property Name="FechaAlta" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Version">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_AspNetMenuAccion_Accion">
           <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
@@ -413,6 +478,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JuntaDepartamental_JuntaDepartamental">
+          <End Role="JuntaDepartamental" Type="Self.JuntaDepartamental" Multiplicity="1" />
+          <End Role="JuntaDepartamental1" Type="Self.JuntaDepartamental" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JuntaDepartamental1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JuntaDepartamental_Municipio">
           <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
           <End Role="JuntaDepartamental" Type="Self.JuntaDepartamental" Multiplicity="*" />
@@ -557,6 +634,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UsuarioApp_JuntaDepartamental">
+          <End Role="JuntaDepartamental" Type="Self.JuntaDepartamental" Multiplicity="0..1" />
+          <End Role="UsuarioApp" Type="Self.UsuarioApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UsuarioApp">
+              <PropertyRef Name="JuntaDepartamentalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
@@ -582,9 +671,52 @@
           <EntitySet Name="Mesa" EntityType="Self.Mesa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecuentoVoto" EntityType="Self.RecuentoVoto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoCategoria" EntityType="Self.TipoCategoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoPartidoPolitico" EntityType="Self.TipoPartidoPolitico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioApp" EntityType="Self.UsuarioApp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Version" EntityType="Self.Version" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Afiliados" EntityType="Self.Afiliados" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Afiliados].[Id] AS [Id], 
+    [Afiliados].[ApellidoNombre] AS [ApellidoNombre], 
+    [Afiliados].[Apellido] AS [Apellido], 
+    [Afiliados].[Nombre] AS [Nombre], 
+    [Afiliados].[Matricula] AS [Matricula], 
+    [Afiliados].[Domicilio] AS [Domicilio], 
+    [Afiliados].[Seccion] AS [Seccion], 
+    [Afiliados].[SeccionCod] AS [SeccionCod], 
+    [Afiliados].[Circuito] AS [Circuito], 
+    [Afiliados].[CircuitoCod] AS [CircuitoCod], 
+    [Afiliados].[FechaNacimiento] AS [FechaNacimiento], 
+    [Afiliados].[Clase] AS [Clase], 
+    [Afiliados].[Profesion] AS [Profesion], 
+    [Afiliados].[FechaDomicilio] AS [FechaDomicilio], 
+    [Afiliados].[Partido] AS [Partido]
+    FROM [dbo].[Afiliados] AS [Afiliados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Padron" EntityType="Self.Padron" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Padron].[ID] AS [ID], 
+    [Padron].[Apellido] AS [Apellido], 
+    [Padron].[Nombre] AS [Nombre], 
+    [Padron].[TipoMatricula] AS [TipoMatricula], 
+    [Padron].[Matricula] AS [Matricula], 
+    [Padron].[Domicilio] AS [Domicilio], 
+    [Padron].[NumeroCircuito] AS [NumeroCircuito], 
+    [Padron].[FechaNacimiento] AS [FechaNacimiento], 
+    [Padron].[Clase] AS [Clase], 
+    [Padron].[Profesion] AS [Profesion], 
+    [Padron].[FechaDomicilio] AS [FechaDomicilio], 
+    [Padron].[Sexo] AS [Sexo], 
+    [Padron].[EsAfiliado] AS [EsAfiliado], 
+    [Padron].[AfiliadoCircuito] AS [AfiliadoCircuito], 
+    [Padron].[AvalMunicipioID] AS [AvalMunicipioID], 
+    [Padron].[AvalLista] AS [AvalLista], 
+    [Padron].[AvalFechaAlta] AS [AvalFechaAlta], 
+    [Padron].[AvalUsuarioAppIDAlta] AS [AvalUsuarioAppIDAlta], 
+    [Padron].[Afiliado] AS [Afiliado]
+    FROM [dbo].[Padron] AS [Padron]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
@@ -645,6 +777,10 @@
             <End Role="Circuito" EntitySet="Circuito" />
             <End Role="Escuela" EntitySet="Escuela" />
           </AssociationSet>
+          <AssociationSet Name="FK_JuntaDepartamental_JuntaDepartamental" Association="Self.FK_JuntaDepartamental_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="JuntaDepartamental1" EntitySet="JuntaDepartamental" />
+          </AssociationSet>
           <AssociationSet Name="FK_JuntaDepartamental_Municipio" Association="Self.FK_JuntaDepartamental_Municipio">
             <End Role="Municipio" EntitySet="Municipio" />
             <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
@@ -692,6 +828,10 @@
           <AssociationSet Name="FK_RecuentoVoto_Mesa" Association="Self.FK_RecuentoVoto_Mesa">
             <End Role="Mesa" EntitySet="Mesa" />
             <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioApp_JuntaDepartamental" Association="Self.FK_UsuarioApp_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="UsuarioApp" EntitySet="UsuarioApp" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -749,7 +889,6 @@
           <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(ComputosPJModel.GetPermisosPorNombreDeUsuario_Result)">
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Circuito" EntityType="ComputosPJModel.Circuito" />
           <EntitySet Name="Eleccion" EntityType="ComputosPJModel.Eleccion" />
           <EntitySet Name="EnlaceEleccionEscuela" EntityType="ComputosPJModel.EnlaceEleccionEscuela" />
           <EntitySet Name="EnlaceEleccionTipoCategoria" EntityType="ComputosPJModel.EnlaceEleccionTipoCategoria" />
@@ -759,13 +898,8 @@
           <EntitySet Name="Mesa" EntityType="ComputosPJModel.Mesa" />
           <EntitySet Name="Municipio" EntityType="ComputosPJModel.Municipio" />
           <EntitySet Name="RecuentoVoto" EntityType="ComputosPJModel.RecuentoVoto" />
-          <EntitySet Name="sysdiagrams" EntityType="ComputosPJModel.sysdiagrams" />
           <EntitySet Name="TipoCategoria" EntityType="ComputosPJModel.TipoCategoria" />
           <EntitySet Name="TipoPartidoPolitico" EntityType="ComputosPJModel.TipoPartidoPolitico" />
-          <AssociationSet Name="FK_Circuito_JuntaDepartamental" Association="ComputosPJModel.FK_Circuito_JuntaDepartamental">
-            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
-            <End Role="Circuito" EntitySet="Circuito" />
-          </AssociationSet>
           <AssociationSet Name="FK_EnlaceEleccionEscuela_Eleccion" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Eleccion">
             <End Role="Eleccion" EntitySet="Eleccion" />
             <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
@@ -806,21 +940,15 @@
             <End Role="Mesa" EntitySet="Mesa" />
             <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
           </AssociationSet>
-          <EntitySet Name="Escuela" EntityType="ComputosPJModel.Escuela" />
-          <AssociationSet Name="FK_Escuela_Circuito" Association="ComputosPJModel.FK_Escuela_Circuito">
-            <End Role="Circuito" EntitySet="Circuito" />
-            <End Role="Escuela" EntitySet="Escuela" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EnlaceEleccionEscuela_Escuela" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
-          </AssociationSet>
           <EntitySet Name="AspNetRoles" EntityType="ComputosPJModel.AspNetRoles" />
-          <EntitySet Name="AspNetUsers" EntityType="ComputosPJModel.AspNetUsers" />
           <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
           </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="ComputosPJModel.AspNetUsers" />
+          <EntitySet Name="UsuarioApp" EntityType="ComputosPJModel.UsuarioApp" />
+          <EntitySet Name="Afiliados" EntityType="ComputosPJModel.Afiliados" />
+          <EntitySet Name="Padron" EntityType="ComputosPJModel.Padron" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ComputosPJModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -841,11 +969,34 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="RecuentoVoto" EntitySet="RecuentoVoto" />
           </AssociationSet>
+          <AssociationSet Name="FK_JuntaDepartamental_JuntaDepartamental" Association="ComputosPJModel.FK_JuntaDepartamental_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="JuntaDepartamental1" EntitySet="JuntaDepartamental" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioApp_JuntaDepartamental" Association="ComputosPJModel.FK_UsuarioApp_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="UsuarioApp" EntitySet="UsuarioApp" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="ComputosPJModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Circuito" EntityType="ComputosPJModel.Circuito" />
+          <EntitySet Name="Escuela" EntityType="ComputosPJModel.Escuela" />
+          <AssociationSet Name="FK_Circuito_JuntaDepartamental" Association="ComputosPJModel.FK_Circuito_JuntaDepartamental">
+            <End Role="JuntaDepartamental" EntitySet="JuntaDepartamental" />
+            <End Role="Circuito" EntitySet="Circuito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Escuela_Circuito" Association="ComputosPJModel.FK_Escuela_Circuito">
+            <End Role="Circuito" EntitySet="Circuito" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnlaceEleccionEscuela_Escuela" Association="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="EnlaceEleccionEscuela" EntitySet="EnlaceEleccionEscuela" />
+          </AssociationSet>
+          <EntitySet Name="Version" EntityType="ComputosPJModel.Version" />
+          </EntityContainer>
         <EntityType Name="Accion">
           <Key>
             <PropertyRef Name="ID" />
@@ -961,16 +1112,6 @@
           <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="mnuId" Nullable="true" />
         </ComplexType>
-        <EntityType Name="Circuito">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="JuntaDepartamentalID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="JuntaDepartamental" Relationship="ComputosPJModel.FK_Circuito_JuntaDepartamental" FromRole="Circuito" ToRole="JuntaDepartamental" />
-          <NavigationProperty Name="Escuela" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Circuito" ToRole="Escuela" />
-        </EntityType>
         <EntityType Name="Eleccion">
           <Key>
             <PropertyRef Name="ID" />
@@ -1024,8 +1165,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MunicipioID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Circuito_JuntaDepartamental" FromRole="JuntaDepartamental" ToRole="Circuito" />
           <NavigationProperty Name="Municipio" Relationship="ComputosPJModel.FK_JuntaDepartamental_Municipio" FromRole="JuntaDepartamental" ToRole="Municipio" />
+          <NavigationProperty Name="JuntaDepartamental1" Relationship="ComputosPJModel.FK_JuntaDepartamental_JuntaDepartamental" FromRole="JuntaDepartamental" ToRole="JuntaDepartamental1" />
+          <NavigationProperty Name="JuntaDepartamental2" Relationship="ComputosPJModel.FK_JuntaDepartamental_JuntaDepartamental" FromRole="JuntaDepartamental1" ToRole="JuntaDepartamental" />
+          <NavigationProperty Name="UsuarioApp" Relationship="ComputosPJModel.FK_UsuarioApp_JuntaDepartamental" FromRole="JuntaDepartamental" ToRole="UsuarioApp" />
+          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Circuito_JuntaDepartamental" FromRole="JuntaDepartamental" ToRole="Circuito" />
         </EntityType>
         <EntityType Name="Lista">
           <Key>
@@ -1072,16 +1216,6 @@
           <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="RecuentoVoto" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TipoCategoria">
           <Key>
             <PropertyRef Name="ID" />
@@ -1098,18 +1232,6 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Lista" Relationship="ComputosPJModel.FK_Lista_TipoPartidoPolitico" FromRole="TipoPartidoPolitico" ToRole="Lista" />
         </EntityType>
-        <Association Name="FK_Circuito_JuntaDepartamental">
-          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="1" />
-          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JuntaDepartamental">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Circuito">
-              <PropertyRef Name="JuntaDepartamentalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EnlaceEleccionEscuela_Eleccion">
           <End Type="ComputosPJModel.Eleccion" Role="Eleccion" Multiplicity="1" />
           <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
@@ -1230,40 +1352,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Escuela">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CircuitoID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Escuela" ToRole="Circuito" />
-          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="Escuela" ToRole="EnlaceEleccionEscuela" />
-        </EntityType>
-        <Association Name="FK_Escuela_Circuito">
-          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="1" />
-          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Circuito">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Escuela">
-              <PropertyRef Name="CircuitoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EnlaceEleccionEscuela_Escuela">
-          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="1" />
-          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EnlaceEleccionEscuela">
-              <PropertyRef Name="EscuelaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -1273,6 +1361,18 @@
           <NavigationProperty Name="MenuAspNetRoles" Relationship="ComputosPJModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
           <NavigationProperty Name="AspNetUsers" Relationship="ComputosPJModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Type="ComputosPJModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="ComputosPJModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -1292,6 +1392,7 @@
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Dni" Type="Int64" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="ComputosPJModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="ComputosPJModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Eleccion" Relationship="ComputosPJModel.FK_Eleccion_Eleccion" FromRole="AspNetUsers" ToRole="Eleccion" />
@@ -1299,18 +1400,69 @@
           <NavigationProperty Name="RecuentoVoto1" Relationship="ComputosPJModel.FK_RecuentoVoto_AspNetUsers1" FromRole="AspNetUsers" ToRole="RecuentoVoto" />
           <NavigationProperty Name="AspNetRoles" Relationship="ComputosPJModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
-          <End Type="ComputosPJModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
-          <End Type="ComputosPJModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MenuAspNetRoles">
-              <PropertyRef Name="AspNetRolesId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="UsuarioApp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DNI" Type="Int64" Nullable="false" />
+          <Property Name="Celular" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Foto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JuntaDepartamentalID" Type="Int32" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JuntaDepartamental" Relationship="ComputosPJModel.FK_UsuarioApp_JuntaDepartamental" FromRole="UsuarioApp" ToRole="JuntaDepartamental" />
+        </EntityType>
+        <EntityType Name="Afiliados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ApellidoNombre" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Matricula" Type="Int64" />
+          <Property Name="Domicilio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Seccion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SeccionCod" Type="Int32" />
+          <Property Name="Circuito" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CircuitoCod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Clase" Type="Int32" />
+          <Property Name="Profesion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaDomicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Partido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Padron">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Apellido" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="TipoMatricula" />
+            <PropertyRef Name="Matricula" />
+            <PropertyRef Name="NumeroCircuito" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TipoMatricula" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Matricula" Type="Int64" Nullable="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroCircuito" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Clase" Type="Int32" />
+          <Property Name="Profesion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaDomicilio" Type="DateTime" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EsAfiliado" Type="Boolean" />
+          <Property Name="AfiliadoCircuito" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvalMunicipioID" Type="Int32" />
+          <Property Name="AvalLista" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvalFechaAlta" Type="DateTime" Precision="0" />
+          <Property Name="AvalUsuarioAppIDAlta" Type="Int32" />
+          <Property Name="Afiliado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1375,11 +1527,99 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JuntaDepartamental_JuntaDepartamental">
+          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="1" />
+          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JuntaDepartamental1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioApp_JuntaDepartamental">
+          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="0..1" />
+          <End Type="ComputosPJModel.UsuarioApp" Role="UsuarioApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UsuarioApp">
+              <PropertyRef Name="JuntaDepartamentalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Type="ComputosPJModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="ComputosPJModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        <EntityType Name="Circuito">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="JuntaDepartamentalID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroCircuito" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JuntaDepartamental" Relationship="ComputosPJModel.FK_Circuito_JuntaDepartamental" FromRole="Circuito" ToRole="JuntaDepartamental" />
+          <NavigationProperty Name="Escuela" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Circuito" ToRole="Escuela" />
+        </EntityType>
+        <EntityType Name="Escuela">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="Int32" Nullable="false" />
+          <Property Name="CircuitoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Circuito" Relationship="ComputosPJModel.FK_Escuela_Circuito" FromRole="Escuela" ToRole="Circuito" />
+          <NavigationProperty Name="EnlaceEleccionEscuela" Relationship="ComputosPJModel.FK_EnlaceEleccionEscuela_Escuela" FromRole="Escuela" ToRole="EnlaceEleccionEscuela" />
+        </EntityType>
+        <Association Name="FK_Circuito_JuntaDepartamental">
+          <End Type="ComputosPJModel.JuntaDepartamental" Role="JuntaDepartamental" Multiplicity="1" />
+          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JuntaDepartamental">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Circuito">
+              <PropertyRef Name="JuntaDepartamentalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Escuela_Circuito">
+          <End Type="ComputosPJModel.Circuito" Role="Circuito" Multiplicity="1" />
+          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuito">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="CircuitoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnlaceEleccionEscuela_Escuela">
+          <End Type="ComputosPJModel.Escuela" Role="Escuela" Multiplicity="1" />
+          <End Type="ComputosPJModel.EnlaceEleccionEscuela" Role="EnlaceEleccionEscuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnlaceEleccionEscuela">
+              <PropertyRef Name="EscuelaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Version">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Version1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1472,15 +1712,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Circuito">
-            <EntityTypeMapping TypeName="ComputosPJModel.Circuito">
-              <MappingFragment StoreEntitySet="Circuito">
-                <ScalarProperty Name="JuntaDepartamentalID" ColumnName="JuntaDepartamentalID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Eleccion">
             <EntityTypeMapping TypeName="ComputosPJModel.Eleccion">
               <MappingFragment StoreEntitySet="Eleccion">
@@ -1568,17 +1799,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ComputosPJModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoCategoria">
             <EntityTypeMapping TypeName="ComputosPJModel.TipoCategoria">
               <MappingFragment StoreEntitySet="TipoCategoria">
@@ -1595,15 +1815,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Escuela">
-            <EntityTypeMapping TypeName="ComputosPJModel.Escuela">
-              <MappingFragment StoreEntitySet="Escuela">
-                <ScalarProperty Name="CircuitoID" ColumnName="CircuitoID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="ComputosPJModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -1615,6 +1826,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="ComputosPJModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="Dni" ColumnName="Dni" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1633,6 +1845,66 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioApp">
+            <EntityTypeMapping TypeName="ComputosPJModel.UsuarioApp">
+              <MappingFragment StoreEntitySet="UsuarioApp">
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="JuntaDepartamentalID" ColumnName="JuntaDepartamentalID" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Afiliados">
+            <EntityTypeMapping TypeName="ComputosPJModel.Afiliados">
+              <MappingFragment StoreEntitySet="Afiliados">
+                <ScalarProperty Name="Partido" ColumnName="Partido" />
+                <ScalarProperty Name="FechaDomicilio" ColumnName="FechaDomicilio" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="CircuitoCod" ColumnName="CircuitoCod" />
+                <ScalarProperty Name="Circuito" ColumnName="Circuito" />
+                <ScalarProperty Name="SeccionCod" ColumnName="SeccionCod" />
+                <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Padron">
+            <EntityTypeMapping TypeName="ComputosPJModel.Padron">
+              <MappingFragment StoreEntitySet="Padron">
+                <ScalarProperty Name="Afiliado" ColumnName="Afiliado" />
+                <ScalarProperty Name="AvalUsuarioAppIDAlta" ColumnName="AvalUsuarioAppIDAlta" />
+                <ScalarProperty Name="AvalFechaAlta" ColumnName="AvalFechaAlta" />
+                <ScalarProperty Name="AvalLista" ColumnName="AvalLista" />
+                <ScalarProperty Name="AvalMunicipioID" ColumnName="AvalMunicipioID" />
+                <ScalarProperty Name="AfiliadoCircuito" ColumnName="AfiliadoCircuito" />
+                <ScalarProperty Name="EsAfiliado" ColumnName="EsAfiliado" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="FechaDomicilio" ColumnName="FechaDomicilio" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="NumeroCircuito" ColumnName="NumeroCircuito" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="TipoMatricula" ColumnName="TipoMatricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="ComputosPJModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -1641,7 +1913,34 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Circuito">
+            <EntityTypeMapping TypeName="ComputosPJModel.Circuito">
+              <MappingFragment StoreEntitySet="Circuito">
+                <ScalarProperty Name="NumeroCircuito" ColumnName="NumeroCircuito" />
+                <ScalarProperty Name="JuntaDepartamentalID" ColumnName="JuntaDepartamentalID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Escuela">
+            <EntityTypeMapping TypeName="ComputosPJModel.Escuela">
+              <MappingFragment StoreEntitySet="Escuela">
+                <ScalarProperty Name="CircuitoID" ColumnName="CircuitoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Version">
+            <EntityTypeMapping TypeName="ComputosPJModel.Version">
+              <MappingFragment StoreEntitySet="Version">
+                <ScalarProperty Name="Version1" ColumnName="Version" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using ComputosPJ.Models;
+using System.Linq;
 
 namespace ComputosPJ.Controllers.Seguridad
 {
@@ -19,7 +20,7 @@ namespace ComputosPJ.Controllers.Seguridad
     [RoutePrefix("api/Account")]
     public class AccountApiController : ApiController
     {
-
+        private ComputosPJEntities db = new ComputosPJEntities();
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
@@ -46,27 +47,64 @@ namespace ComputosPJ.Controllers.Seguridad
 
         // POST api/Account/Register
         [AllowAnonymous]
+        [HttpPost]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(string email, string password)
+        public async Task<IHttpActionResult> Register(UsuarioApi usuarioApi)
         {
-            if (!ModelState.IsValid)
+            if (usuarioApi.x == "76b32470-e66e-4408-8541-5c36a173fff0")
             {
-                return BadRequest(ModelState);
+                AspNetUsers aspNetUsers = db.AspNetUsers.FirstOrDefault(us=> us.UserName == usuarioApi.username);
+                if (aspNetUsers != null)
+                {
+                    aspNetUsers.FirstName = usuarioApi.nombre;
+                    aspNetUsers.LastName = usuarioApi.apellido;
+                    aspNetUsers.Dni = usuarioApi.dni;
+                    aspNetUsers.Foto = usuarioApi.foto;
+                    aspNetUsers.Email = usuarioApi.email;
+                    db.SaveChanges();
+                    return Ok("usuario modificado");
+                }
+                else {
+
+                    if (!ModelState.IsValid)
+                    {
+                        return BadRequest(ModelState);
+                    }
+
+                    var user = new ApplicationUser() { FirstName = usuarioApi.nombre, LastName = usuarioApi.apellido, UserName = usuarioApi.username, Email = usuarioApi.email, Dni = usuarioApi.dni, Foto = usuarioApi.foto };
+
+                    IdentityResult result = await UserManager.CreateAsync(user, usuarioApi.password);
+
+                    if (!result.Succeeded)
+                    {
+                        return GetErrorResult(result);
+                    }
+
+                    return Ok();
+                }
             }
-
-            var user = new ApplicationUser() { UserName = email, Email = password };
-            
-            IdentityResult result = await UserManager.CreateAsync(user, password);
-
-            if (!result.Succeeded)
+            else
             {
-                return GetErrorResult(result);
+                return NotFound();
             }
-
-            return Ok();
         }
-       
-        
+
+        [AllowAnonymous]
+        [HttpGet]
+        public string AppVersion()
+        {
+
+            if (db.Version.Find(1) != null)
+            {
+                return db.Version.Find(1).Version1;
+            }
+            else
+            {
+                return "error";
+            }
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

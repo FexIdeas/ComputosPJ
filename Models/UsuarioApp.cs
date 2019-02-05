@@ -12,21 +12,17 @@ namespace ComputosPJ.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Circuito
+    public partial class UsuarioApp
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Circuito()
-        {
-            this.Escuela = new HashSet<Escuela>();
-        }
-    
         public int ID { get; set; }
+        public string Apellido { get; set; }
         public string Nombre { get; set; }
-        public int JuntaDepartamentalID { get; set; }
-        public string NumeroCircuito { get; set; }
+        public long DNI { get; set; }
+        public string Celular { get; set; }
+        public string Foto { get; set; }
+        public Nullable<int> JuntaDepartamentalID { get; set; }
+        public Nullable<System.DateTime> FechaAlta { get; set; }
     
         public virtual JuntaDepartamental JuntaDepartamental { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Escuela> Escuela { get; set; }
     }
 }

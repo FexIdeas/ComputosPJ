@@ -17,6 +17,7 @@ namespace ComputosPJ.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JuntaDepartamental()
         {
+            this.UsuarioApp = new HashSet<UsuarioApp>();
             this.Circuito = new HashSet<Circuito>();
         }
     
@@ -24,8 +25,12 @@ namespace ComputosPJ.Models
         public string Nombre { get; set; }
         public int MunicipioID { get; set; }
     
+        public virtual Municipio Municipio { get; set; }
+        public virtual JuntaDepartamental JuntaDepartamental1 { get; set; }
+        public virtual JuntaDepartamental JuntaDepartamental2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioApp> UsuarioApp { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Circuito> Circuito { get; set; }
-        public virtual Municipio Municipio { get; set; }
     }
 }
