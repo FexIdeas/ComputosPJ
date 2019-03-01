@@ -209,6 +209,8 @@
     <Compile Include="Controllers\CircuitosController.cs" />
     <Compile Include="Controllers\EleccionesController.cs" />
     <Compile Include="Controllers\EnlaceEleccionesEscuelasController.cs" />
+    <Compile Include="Controllers\EnlaceEleccionTipoCategoriaListasController.cs" />
+    <Compile Include="Controllers\EnlaceEleccionTipoCategoriasController.cs" />
     <Compile Include="Controllers\EscuelasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JuntasDepartamentalesController.cs" />
@@ -1761,6 +1763,16 @@
     <Content Include="Views\EnlaceEleccionesEscuelas\Edit.cshtml" />
     <Content Include="Views\EnlaceEleccionesEscuelas\Index.cshtml" />
     <None Include="Properties\PublishProfiles\ComputosPJSYNC.pubxml" />
+    <Content Include="Views\EnlaceEleccionTipoCategorias\Create.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategorias\Delete.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategorias\Details.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategorias\Edit.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategorias\Index.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategoriaListas\Create.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategoriaListas\Delete.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategoriaListas\Details.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategoriaListas\Edit.cshtml" />
+    <Content Include="Views\EnlaceEleccionTipoCategoriaListas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

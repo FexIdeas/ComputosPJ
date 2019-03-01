@@ -19,7 +19,7 @@ namespace ComputosPJ.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Foto { get; set; }
-        public int? Dni { get; set; }
+        public long? Dni { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

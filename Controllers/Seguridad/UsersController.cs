@@ -293,7 +293,17 @@ namespace ComputosPJ.Controllers.Seguridad
                 //Se agregan los roles seleccionados
                 if (RolesID.Length>0)
                 {
-                    await userManager.AddToRolesAsync(user.Id, RolesID);
+                    if(RolesID.Length == 1)
+                    {
+                        if (RolesID[0] != "")
+                        {
+                            await userManager.AddToRolesAsync(user.Id, RolesID);
+                        }
+                    }else
+                    {
+                        await userManager.AddToRolesAsync(user.Id, RolesID);
+                    }
+                    
                 }
                 return RedirectToAction("Index");
             }                
